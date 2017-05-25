@@ -1,0 +1,97 @@
+{% load static %}
+<head>
+  <title>Hotel Line</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="{% static "hotel/css/main.css" %}">
+  <script src="{% static "hotel/js/funciones.js" %}"></script>
+</head>
+
+<body>
+  <div class="jumbotron">
+    <div class="container text-center">
+      <div class="col-md-10">
+        <div class="col-md-2">
+          <img src="{% static "hotel/img/logo.jpg" %}" class="img-responsive img-rounded" style="width:120px; height:80px">
+        </div>
+        <div class="col-md-10">
+          <h1>Hotel Line</h1>
+          <p>Hotel situado en Sierra Nevada</p>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="row">
+          <a id="acceder" data-toggle="modal" href="#login">Acceder</a>
+        </div>
+        <div class="row">
+          <img class="img-thumbnail" src="{% static "hotel/img/spain.png" %}" style="width:32px; height:32px"/>
+          <img class="img-thumbnail" src="{% static "hotel/img/france.png" %}" style="width:32px; height:32px"/>
+          <img class="img-thumbnail" src="{% static "hotel/img/italy.png" %}" style="width:32px; height:32px"/>
+          <img class="img-thumbnail" src="{% static "hotel/img/england.png" %}" style="width:32px; height:32px"/>
+          <img class="img-thumbnail" src="{% static "hotel/img/germany.png" %}" style="width:32px; height:32px"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#></a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/hotel">Inicio</a></li>
+          <li class="dropdown">
+          <li><a href="/hotel/servicios">Servicios</a></li>
+          <li><a href="/hotel/galeria">Galeria</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Información general <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/hotel/ubicacion">Cómo llegar</a></li>
+              <li><a href="/hotel/instalaciones">Instalaciones</a></li>
+              <li><a href="/hotel/info">Sobre nosotros</a></li>
+              <li><a href="/hotel/contacto">Contacto</a></li>
+            </ul>
+          </li>
+          <li><a href="/hotel/foro">Foro</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Tu cuenta</a></li>
+          <li><a data-toggle="modal" href="#reserva1"><span class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% block container %}
+  {% endblock %}
+  <footer class="container-fluid text-center">
+    <div class="panel panel-info">
+      <div class="panel-body">
+        <div class="row">
+          <a>FAQ</a>
+          <a>Ayuda</a>
+          <a>Política de Cookies</a>
+          <a>Aviso legal</a>
+        </div>
+        <div class="row">
+          <a>Facebook</a>
+          <a>Twitter</a>
+          <a>Instagram</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>

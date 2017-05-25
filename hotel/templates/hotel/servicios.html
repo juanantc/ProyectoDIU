@@ -1,541 +1,96 @@
+{% extends "hotel/base.html" %}
+{% load static %}
 <html lang="es">
-<head>
-  <title>Hotel Line</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-  <link rel="stylesheet" href="css/main.css">
-
-  <!-- datepicker -->
-  <script>
-  $( function() {
-    $( "#datepicker1" ).datepicker();
-    $( "#datepicker2" ).datepicker();
-  } );
-  </script>
-
-</head>
-
-<body>
-<div class="jumbotron">
-  <div class="container text-center">
-    <div class="col-md-10">
-      <div class="col-md-2">
-        {% load static %}
-        <img src="{% static "hotel/img/logo.jpg" %}" class="img-responsive img-rounded" style="width:120px; height:80px">
-      </div>
-      <div class="col-md-10">
-        <h1>Hotel Line</h1>
-        <p>Hotel situado en Sierra Nevada</p>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="row">
-        <a id="acceder" data-toggle="modal" href="#login">Acceder</a>
-        <a id="dni" style="display:none;">Bienvenido 12345678-A</a>
-      </div>
-      <div class="row">
-        <img class="img-thumbnail" src="{% static "hotel/img/spain.png" %}" style="width:32px; height:32px"/>
-        <img class="img-thumbnail" src="{% static "hotel/img/france.png" %}" style="width:32px; height:32px"/>
-        <img class="img-thumbnail" src="{% static "hotel/img/italy.png" %}" style="width:32px; height:32px"/>
-        <img class="img-thumbnail" src="{% static "hotel/img/england.png" %}" style="width:32px; height:32px"/>
-        <img class="img-thumbnail" src="{% static "hotel/img/germany.png" %}" style="width:32px; height:32px"/>
-      </div>
-    </div>
-  </div>
-</div>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#></a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/hotel">Inicio</a></li>
-        <li><a href="/hotel/servicios">Servicios</a></li>
-        <li><a href="/hotel/galeria">Galeria</a></li>
-        <li><a href="/hotel/informacion">Información general</a></li>
-        <li><a href="/hotel/foro">Foro</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Tu cuenta</a></li>
-        <li><a data-toggle="modal" href="#reserva1"><span class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-4">
+  {% block container %}
+  <div class="container">
+    <div class="row">
       <div class="panel panel-primary">
-        <img src="{% static "hotel/img/logo.jpg" %}" class="img-responsive" style="width:48px; height:32px">
-        <h3 class="text-center">Haz tu reserva</h3>
-        <div class="panel-body">
-          <p>Fecha de entrada: <input type="text" id="datepicker1"></p>
-          <p>Fecha de salida:  <input type="text" id="datepicker2"></p>
-          <p>Personas: <input type="text"></p>
-
-          <!-- Trigger the modal with a button -->
-          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#comprDispo">Comprobar</button>
-
-          <!-- Modal -->
-          <div class="modal fade" id="comprDispo" role="dialog">
-            <div class="modal-dialog modal-sm">
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title text-center">Disponibilidad</h4>
-                </div>
-                <div class="modal-body">
-                  <script>
-                  $(document).ready(function(){
-                      $("#btnOtroCaso1").click(function(){
-                          $("#btnSig").hide();
-                          $("#btnOtroCaso1").hide();
-                          $("#btnOtroCaso2").show();
-                          $("#p1").hide();
-                          $("#p2").show();
-                          $("#p3").show();
-                      });
-                      $("#btnOtroCaso2").click(function(){
-                          $("#btnSig").show();
-                          $("#btnOtroCaso1").show();
-                          $("#btnOtroCaso2").hide();
-                          $("#p1").show();
-                          $("#p2").hide();
-                          $("#p3").hide();
-                      });
-                  });
-                  </script>
-                  <p id="p1">Hay disponibilidad para la fecha deseada</p>
-                  <p id="p2" style="display:none;" class="bold">No hay disponibilidad para la fecha deseada</p><br>
-                  <p id="p3" style="display:none;" class="text-center">Solamente hay habitaciones para 1 persona</p>
-                </div>
-                <div class="modal-footer">
-                  <div class="panel-footer">
-                    <button data-toggle="modal" data-target="#disponib1" data-dismiss="modal" id="btnSig">Siguiente</button>
-                    <button id="btnOtroCaso1">Otro caso</button>
-                    <button id="btnOtroCaso2" style="display:none;">Otro caso</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-1"></div>
-    <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-body">
-          <div class="col-md-6">
-            <div class="row">
-              <img class="img-thumbnail" src="{% static "hotel/img/ventajas1.jpg" %}" style="width:100%"/>
-            </div>
-            <div class="row">
-              <img class="img-thumbnail" src="{% static "hotel/img/ventajas3.jpg" %}" style="width:100%"/>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="row">
-              <img class="img-thumbnail" src="{% static "hotel/img/ventajas2.jpg" %}" style="width:100%"/>
-            </div>
-            <div class="row">
-              <img class="img-thumbnail" src="{% static "hotel/img/ventajas4.jpg" %}" style="width:100%"/>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-primary">
-        <div class="panel-body">
-          <div id="myCarousel" class="carousel slide" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-                <li data-target="#myCarousel" data-slide-to="3"></li>
-              </ol>
-
-              <!-- Wrapper for slides -->
-              <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                  <img src="{% static "hotel/img/panoramica.jpg" %}" width="100%" height="400">
-                </div>
-
-                <div class="item">
-                  <img src="{% static "hotel/img/exterior.jpg" %}" width="100%" height="400">
-                </div>
-
-                <div class="item">
-                  <img src="{% static "hotel/img/comedor.jpg" %}" width="100%" height="400">
-                </div>
-
-                <div class="item">
-                  <img src="{% static "hotel/img/habitacion.jpg" %}" width="100%" height="400">
-                </div>
-              </div>
-
-              <!-- Left and right controls -->
-              <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-              </a>
-              <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Siguiente</span>
-              </a>
-
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading text-center"><b>Dónde estamos</b></div>
+        <h4 class="text-center">Haz tu reserva</h4>
         <div class="panel-body">
           <div class="row">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3182.4716445174304!2d-3.402188684701826!3d37.09388897988911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd71dd40afd5c2ff%3A0x9892f15a1bbecf08!2s18196+Pradollano%2C+Granada!5e0!3m2!1ses!2ses!4v1493115767335" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>          </div>
-             <br/><div class="center"><a href="informacion.html"><button type="button" class="boton_personalizado">Más información</button></a></div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading text-center"><b>Promociones y ofertas</b></div>
-        <div class="panel-body">
-             <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                 <!-- Wrapper for slides -->
-                 <div class="carousel-inner" role="listbox">
-                   <div class="item active">
-                     <img src="{% static "hotel/img/oferta2.jpg" %}" width="100%" height="400">
-                   </div>
-
-                   <div class="item">
-                     <img src="{% static "hotel/img/oferta3.jpg" %}" width="100%" height="400">
-                   </div>
-
-                   <div class="item">
-                     <img src="{% static "hotel/img/oferta4.jpg" %}" width="100%" height="400">
-                   </div>
-                 </div>
-               <br/><br/><br/><div class="center"><a href="informacion.html"><button type="button" class="boton_personalizado">Más información</button></a></div>
-              </div>
-
-      </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-primary text-center">
-        <div class="panel-heading"><b>Descubra nuestras principales instalaciones</b></div>
-        <div class="panel-body">
-             <p class="left">En nuestro hotel, podrá disfrutar de:</p>
-             <p class="bold">Piscina climatizada</p>
-             <p class="bold"> Spa</p>
-             <p class="bold"> Gimnasio</p>
-             <p class="bold">Sala de masajes</p>
-             <p class="bold"> Sala de recreativos</p>
-             <p class="bold"> Casino</p>
-             <p class="bold"> Mirador</p>
-
-             <p class="justify">Además podrá disfrutar de diferentes servicios, como organizar fiestas, banquetes, cumpleaños...</p>
-             <br>
-             <div class="center"><a href="informacion.html"><button type="button" class="boton_personalizado">Más información</button></a></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading"></div>
-        <div class="panel-body"><img src="img/esqui.jpg" class="img-responsive" style="width:100%" alt="Image">
-             <h3>¿Le gustaría prácticar esquí?</h3>
-             <p>En nuestro catálogo de servicios podrá encontrar ofertas y la información necesaria. Disponemos de clases a diferentes niveles, por lo
-             que si nunca lo ha practicado y le gustaría, ésta es tu oportunidad.</p>
-              <div class="center"><a href="servicios.html"><button type="button" class="boton_personalizado">Ver más</button></a></div>
-        </div>
-        <div class="panel-footer"></div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading"></div>
-        <div class="panel-body"><img src="img/senderismo.jpg" class="img-responsive" style="width:100%" alt="Image">
-             <h3>¿Le gusta el senderismo?</h3>
-             <p>En nuestro catálogo de servicios podrá encontrar ofertas y la información necesaria. Disponemos de clases a diferentes niveles, por lo
-             que si nunca lo ha practicado y le gustaría, ésta es tu oportunidad.</p>
-              <div class="center"><a href="servicios.html"><button type="button" class="boton_personalizado">Ver más</button></a></div>
-        </div>
-        <div class="panel-footer"></div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading"></div>
-        <div class="panel-body"><img src="img/snowboard.jpg" class="img-responsive" style="width:100%" alt="Image">
-          <h3>¿Le gustaría prácticar snow?</h3>
-          <p>En nuestro catálogo de servicios podrá encontrar ofertas y la información necesaria. Disponemos de clases a diferentes niveles, por lo
-          que si nunca lo ha practicado y le gustaría, ésta es tu oportunidad.</p>
-           <div class="center"><a href="servicios.html"><button type="button" class="boton_personalizado">Ver más</button></a></div>
-        </div>
-        <div class="panel-footer"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-
-</div><br><br>
-
-<!-- Modal -->
-<div class="modal fade" id="reserva1" role="dialog">
-  <div class="modal-dialog modal-md">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <img src="img/logo.jpg" class="img-responsive" style="width:48px; height:32px">
-        <h4 class="modal-title text-center">Mis reservas</h4>
-      </div>
-      <div class="modal-body">
-        <div class="panel panel-primary">
-          <div class="panel-body">
-            <script>
-            $(document).ready(function(){
-                $(".btnCancelar").click(function(){
-                    $("#habitacion").hide();
-                    $(".btnCancelar").hide();
-                });
-            });
-            </script>
-            <div class="row">
-              <div class="col-md-10">
-                <h5 id="habitacion">Habitación 3 personas(211) del 23/05/17 hasta 26/05/17</h5>
-              </div>
-              <div class="col-md-2">
-                <button class="btnCancelar">X</button>
-              </div>
+            <div class="col-md-4">
+              <p>Fecha de entrada: <input type="text" id="datepicker1"></p>
+            </div>
+            <div class="col-md-4">
+              <p>Fecha de salida:  <input type="text" id="datepicker2"></p>
+            </div>
+            <div class="col-md-4">
+              <p>Personas: <input type="text"></p>
             </div>
           </div>
-          <div class="panel-footer"><button data-toggle="modal" data-target="#reserva2" data-dismiss="modal">Siguiente</button></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="reserva2" role="dialog">
-  <div class="modal-dialog modal-md">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <img src="img/logo.jpg" class="img-responsive" style="width:48px; height:32px">
-        <h4 class="modal-title text-center">Datos personales</h4>
-      </div>
-      <div class="modal-body">
-        <div class="panel panel-primary">
-          <div class="panel-body">
-            <p>DNI:<input type="text"></p>
-            <p>Nombre:<input type="text"></p>
-            <p>Apellidos:<input type="text"></p>
-            <p>Forma de pago:</p>
-            <p><input type="checkbox">Paypal</p>
-            <p><input type="checkbox">Transferencia</p>
-            <p><input type="checkbox">VISA<input type="text"></p> <br>
-
-            <p class="bold">Total a pagar: 130€</p>
-
+          <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#comprDispo">Comprobar</button>
+            </div>
+            <div class="col-md-5"></div>
           </div>
-          <div class="panel-footer"><button data-toggle="modal" data-target="#reserva3" data-dismiss="modal">Siguiente</button></div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="reserva3" role="dialog">
-  <div class="modal-dialog modal-md">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <img src="img/logo.jpg" class="img-responsive" style="width:48px; height:32px">
-        <h4 class="modal-title text-center"></h4>
-      </div>
-      <div class="modal-body">
+    <div class="row">
+      <div class="col-md-4">
         <div class="panel panel-primary">
-          <div class="panel-body">
-            <img class="center-block" src="img/cargando.gif"/>
+          <div class="panel-heading text-center"><b>Restaurante</b></div>
+          <div class="panel-body"><img src="{% static "hotel/img/restaurante_servicio.jpg" %}" class="img-responsive" style="width:100%" alt="Image"></div>
+          <div class="panel-footer text-center">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#infoServicio">Ver</button>
           </div>
-          <div class="panel-footer"><button data-toggle="modal" data-target="#reserva4" data-dismiss="modal">Siguiente</button></div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="reserva4" role="dialog">
-  <div class="modal-dialog modal-md">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <img src="img/logo.jpg" class="img-responsive" style="width:48px; height:32px">
-        <h4 class="modal-title text-center"></h4>
-      </div>
-      <div class="modal-body">
+      <div class="col-md-4">
         <div class="panel panel-primary">
-          <div class="panel-body">
-            <h4 class="text-center">¡Proceso finalizado con éxito!</h4>
+          <div class="panel-heading text-center"><b>Banquete</b></div>
+          <div class="panel-body"><img src="{% static "hotel/img/banquete.jpg" %}" class="img-responsive" style="width:100%" alt="Image"></div>
+          <div class="panel-footer text-center">
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#infoServicio">Ver</button>
           </div>
-          <div class="panel-footer"><button data-toggle="modal"data-dismiss="modal">Terminar</button></div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="disponib1" role="dialog">
-  <div class="modal-dialog modal-md">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <img src="img/logo.jpg" class="img-responsive" style="width:48px; height:32px">
-        <h4 class="modal-title text-center">Selección de habitación</h4>
-      </div>
-      <div class="modal-body">
+      <div class="col-md-4">
         <div class="panel panel-primary">
-          <div class="panel-body">
-            <img src="img/habitaciones.jpg" class="img-responsive">
-            <select>
-              <option>201</option>
-              <option>202</option>
-              <option>204</option>
-              <option>205</option>
-              <option>207</option>
-              <option>209</option>
-            </select>
+          <div class="panel-heading text-center"><b>Fiesta</b></div>
+          <div class="panel-body"><img src="{% static "hotel/img/fiesta.jpg" %}" class="img-responsive" style="width:100%" alt="Image"></div>
+          <div class="panel-footer text-center">
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Ver</button>
           </div>
-          <div class="panel-footer"><button data-toggle="modal" data-target="#disponib2" data-dismiss="modal">Siguiente</button></div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="disponib2" role="dialog">
-  <div class="modal-dialog modal-md">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <img src="img/logo.jpg" class="img-responsive" style="width:48px; height:32px">
-        <h4 class="modal-title text-center">Selección de habitación</h4>
-      </div>
-      <div class="modal-body">
+    <div class="row">
+      <div class="col-md-4">
         <div class="panel panel-primary">
-          <div class="panel-body">
-            <h4 class="bold">Habitación añadida con éxito</h4>
+          <div class="panel-heading text-center"><b>Cumpleaños</b></div>
+          <div class="panel-body"><img src="{% static "hotel/img/cumpleaños.jpg" %}" class="img-responsive" style="width:100%" alt="Image"></div>
+          <div class="panel-footer text-center">
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#infoServicio">Ver</button>
           </div>
-          <div class="panel-footer"><button data-toggle="modal" data-dismiss="modal">Terminar</button></div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="login" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <img src="img/logo.jpg" class="img-responsive" style="width:48px; height:32px">
-        <h4 class="modal-title text-center"></h4>
-      </div>
-      <div class="modal-body">
+      <div class="col-md-4">
         <div class="panel panel-primary">
-          <div class="panel-body">
-            <p>Usuario: <input type="text"></p>
-            <p>Contraseña: <input type="password"></p>
-            <button data-toggle="modal" data-dismiss="modal">Entrar</button>
+          <div class="panel-heading text-center"><b>Actividades externas</b></div>
+          <div class="panel-body"><img src="{% static "hotel/img/snowboard2.jpg" %}" class="img-responsive" style="width:100%" alt="Image"></div>
+          <div class="panel-footer text-center">
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#infoServicio">Ver</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading text-center"><b>Sala de juegos</b></div>
+          <div class="panel-body"><img src="{% static "hotel/img/sala_juegos2.jpg" %}" class="img-responsive" style="width:100%" alt="Image"></div>
+          <div class="panel-footer text-center">
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#infoServicio">Ver</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<script>
-  $(document).ready(function(){
-    $("#btnIdentificado").click(function(){
-        $("#btnIdentificado").hide();
-        $("#btnNoIdentificado").show();
-        $("#acceder").hide();
-        $("#dni").show();
-
-    });
-    $("#btnNoIdentificado").click(function(){
-      $("#btnIdentificado").show();
-      $("#btnNoIdentificado").hide();
-      $("#acceder").show();
-      $("#dni").hide();
-    });
-});
-</script>
-
-<button id="btnIdentificado">Usuario Identificado</button>
-<button id="btnNoIdentificado" style="display:none;">Usuario no identificado</button>
-
-<footer class="container-fluid text-center">
-  <div class="panel panel-info">
-    <div class="panel-body">
-      <div class="row">
-        <a>FAQ</a>
-        <a>Ayuda</a>
-        <a>Política de Cookies</a>
-        <a>Aviso legal</a>
-      </div>
-      <div class="row">
-        <a>Facebook</a>
-        <a>Twitter</a>
-        <a>Instagram</a>
-      </div>
-    </div>
-  </div>
-</footer>
-</body>
+  {% endblock %}
 </html>

@@ -1,0 +1,35 @@
+{% extends "hotel/base.html" %}
+{% load static %}
+<html lang="es">
+  {% block container %}
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center">CONTACTO</h1>
+      <div class="col-md-6">
+        <h3>Hotel LINE Granada a tu disposición</h3>
+        <p class="justify">Si tienes alguna duda o deseas más información, contacta con nuestro hotel cerca del centro de Granada. Contamos con un equipo de profesionales
+            totalmente a tu servicio que estarán encantados de ayudarte. Queremos que te sientas como en casa.</p>
+            <p class="justify">Hotel Line Granada, urbano y moderno con un gran nivel de confort, está estratégicamente ubicado para los clientes de negocio y ocio.</p>
+
+            <p class="justify">No dude en contactar con nosotros para solicitar cualquier tipo de información o para enviarnos cualquier tipo de sugerencia que usted crea que puede ayudarnos a mejorar.
+           </p>
+           <img src="{% static "hotel/img/contacto.jpg" %}" class="img-responsive" style="width:50%"/>
+      </div>
+      <div class="col-md-6">
+        <br/><br/><br/><br/><br/>
+        <div class="form_contacto">
+          <form>
+            <table>
+              <tr>
+              <td>Nombre:</td>     <td><input type="text"/></td></tr><tr></tr>
+              <tr> <td>Email: </td><td><input type="email"/></td></tr>
+              <tr><td> Consulta:</td> <td><textarea rows="4" cols="50"></textarea></td></tr>
+              <tr><td><input type="submit" value="Enviar"/></td></tr>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</html>

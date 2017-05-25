@@ -1,0 +1,31 @@
+{% extends "hotel/base.html" %}
+{% load static %}
+<html lang="es">
+  {% block container %}
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center">Parking gratuito</h1>
+      <div class="col-md-6">
+        <br>
+        <p class="justify">Si necesita un lugar donde guardar su vehículo durante su estancia, no se preocupe, porque disponemos de un parking gratuito para todos nuestros clientes.
+        </p>
+          <h3>Carasterísticas</h3>
+          <p class="pad-right">Vigilancia y monitorización CCTV las 24 horas</p>
+          <p class="pad-right"> Aparcamiento Cubierto</p>
+          <p class="pad-right"> 67 plazas de aparcamiento</p>
+          <p class="pad-right"> Carteles de guiado</p>
+          <p class="pad-right"> Trasporte gratuito permanente 21h al día (Sin Servicio de 1am a 4am) a todas las terminales (T1, T2 y T4)</p>
+          <p class="pad-right"> Transporte gratuito al recinto ferial de Ifema durante las ferias más concurridas.</p>
+          <p class="pad-right"> El cliente puede llevarse sus llaves</p>
+          <p class="pad-right"> Disponible plazas de aparcamiento para vehículos adaptados para personas con movilidad reducida.</p>
+          <p class="pad-right"> Altura máxima del parking 2.20 m.</p>
+        </p>
+      </div>
+      <div class="col-md-6">
+        <br><br>
+       <img src="{% static "hotel/img/p2.jpg" %}"  class="img-responsive" style="width:100%" >
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</html>

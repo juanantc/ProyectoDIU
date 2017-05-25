@@ -1,0 +1,62 @@
+{% extends "hotel/base.html" %}
+{% load static %}
+<html lang="es">
+  {% block container %}
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center">Instalaciones</h1>
+      <div class="col-md-6">
+        <br/><br/>
+        <a href="/hotel/parking"><p class="left"><b>Parking</b></p></a>
+        <p class="left"><b>Piscina Climatizada</b></p>
+        <p class="left"><b>Spa</b></p>
+        <p class="left"><b>Gimnasio</b></p>
+        <p class="left"><b>Sala de masajes</b></p>
+        <p class="left"><b>Sala de recreativos</b></p>
+        <p class="left"><b>Casino</b></p>
+        <p class="left"><b>Mirador</b></p>
+      </div>
+      <div class="col-md-6">
+        <br><br>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+            <div class="item active">
+              <img src="{% static "hotel/img/piscina_climatizada.jpg" %}"  width="600" height="400">
+            </div>
+            <div class="item">
+              <img src="{% static "hotel/img/sala_juegos.jpg" %}"  width="600" height="400">
+            </div>
+            <div class="item">
+              <img src="{% static "hotel/img/sala_masajes.jpg" %}" width="600" height="400">
+            </div>
+            <div class="item">
+              <img src="{% static "hotel/img/gimnasio.jpg" %}" width="600" height="400">
+            </div>
+            <div class="item">
+              <img src="{% static "hotel/img/p2.jpg" %}" width="600" height="400">
+            </div>
+          </div>
+
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+          </a>
+        </div>
+      </div>
+  </div>
+  {% endblock %}
+</html>
