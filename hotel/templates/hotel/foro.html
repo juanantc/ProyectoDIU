@@ -1,6 +1,63 @@
-{% extends "hotel/base.html" %}
+{% extends "hotel/base2.html" %}
 
 <html lang="es">
-  {% block container %}
+  {% block content %}
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="panel panel-primary">
+          <h3 class="text-center">Opiniones</h3>
+          <div class="panel-body">
+            <div class="panel panel-info">
+              <div class="panel-body">
+                <p> Hotel con muchas comodidades y preciosas vistas, sin duda repetiré.</p>
+              </div>
+              <div class="panel-footer">Juan Antonio Moraleda</div>
+            </div>
+            <div class="panel panel-info">
+              <div class="panel-body">
+                <p> Estancia agradable y buena antención del personal.</p>
+              </div>
+              <div class="panel-footer">Miguel Martín</div>
+            </div>
+            <div class="panel panel-info">
+              <div class="panel-body">
+                <p> Recomendable 100%</p>
+              </div>
+              <div class="panel-footer">Pablo Robles</div>
+            </div>
+            <div class="panel panel-info">
+              <div class="panel-body">
+                <p> Hotel con muchas comodidades y preciosas vistas, sin duda repetiré.</p>
+              </div>
+              <div class="panel-footer">Pablo Robles</div>
+            </div>
+            <div class="panel panel-info">
+              <div class="panel-body">
+                <p> Hotel con muchas comodidades y preciosas vistas, sin duda repetiré.</p>
+              </div>
+              <div class="panel-footer">Pablo Robles</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <div class="row" id="nuevoComentario">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="panel panel-primary">
+          <h4 class="text-center">Nuevo comentario</h4>
+          <div class="form-group">
+            <textarea class="form-control" rows="3">
+            </textarea>
+            <button>Añadir</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <button id="btnOcultarForm">Usuario sin identificar</button>
+    <button id="btnMostrarForm" style="display:none;">Usuario identificado</button>
   {% endblock %}
 </html>

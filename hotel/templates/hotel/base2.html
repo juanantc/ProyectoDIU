@@ -20,6 +20,21 @@
     $( "#datepicker2" ).datepicker();
   } );
   </script>
+  <script>
+  $(document).ready(function(){
+      $("#btnOcultarForm").click(function(){
+          $("#nuevoComentario").hide();
+          $("#btnOcultarForm").hide();
+          $('#btnMostrarForm').show();
+      });
+      $("#btnMostrarForm").click(function(){
+          $("#nuevoComentario").show();
+          $("#btnOcultarForm").show();
+          $('#btnMostrarForm').hide();
+
+      });
+  });
+  </script>
 </head>
 
 <body>
@@ -82,8 +97,38 @@
       </div>
     </div>
   </nav>
-  {% block container %}
+  <div class="container">
+    <div class="row">
+      <div class="panel panel-primary">
+        <h4 class="text-center">Haz tu reserva</h4>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3">
+              <p>F. Entrada: <input type="text" id="datepicker1"></p>
+            </div>
+            <div class="col-md-3">
+              <p>F. Salida:  <input type="text" id="datepicker2"></p>
+            </div>
+            <div class="col-md-3">
+              <p>Adultos: <input type="number"></p>
+            </div>
+            <div class="col-md-3">
+              <p>Niños: <input type="number"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#comprDispo">Comprobar</button>
+            </div>
+            <div class="col-md-5"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% block content %}
   {% endblock %}
+  </div>
   <footer class="container-fluid text-center">
     <div class="panel panel-info">
       <div class="panel-body">

@@ -1,33 +1,7 @@
-{% extends "hotel/base.html" %}
+{% extends "hotel/base2.html" %}
 {% load static %}
 <html lang="es">
-  {% block container %}
-  <div class="container">
-    <div class="row">
-      <div class="panel panel-primary">
-        <h4 class="text-center">Haz tu reserva</h4>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-4">
-              <p>Fecha de entrada: <input type="text" id="datepicker1"></p>
-            </div>
-            <div class="col-md-4">
-              <p>Fecha de salida:  <input type="text" id="datepicker2"></p>
-            </div>
-            <div class="col-md-4">
-              <p>Personas: <input type="text"></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-5"></div>
-            <div class="col-md-2">
-              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#comprDispo">Comprobar</button>
-            </div>
-            <div class="col-md-5"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+  {% block content %}
     <div class="row">
       <div class="col-md-4">
         <div class="panel panel-primary">
@@ -91,6 +65,27 @@
         </div>
       </div>
     </div>
-  </div>
+    <!-- Modal -->
+    <div class="modal fade" id="infoServicio" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title text-center">Restaurante</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel panel-primary">
+              {% load static %}
+              <div class="panel-body"><img src="{% static "hotel/img/restaurante_servicio.jpg" %}" class="img-responsive" style="width:100%"></div>
+              <div class="panel-footer">
+                <p>Con una carta extensa donde los antiguo se mezcla con los nuevos sabores. Deliciosa su ensalada de vieiras. El cordero recién asado inmejorable. Todo ello acompañado de vino de la zona, un auténtico placer.</p>
+                <button type="button" class="btn btn-default">Reservar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   {% endblock %}
 </html>
