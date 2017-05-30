@@ -36,24 +36,20 @@
       </div>
       <div class="col-md-2">
         <div class="row">
-          {% if user.is_authenticated %}
-            <div class="navbar-form navbar-right">
-              <a href="/hotel/logout">Salir</a>
-            </div>
-          {% else %}
-            <form class="navbar-form navbar-right" method="post" action="/bares/">
-              {% csrf_token %}
-            	{{ form }}
-              <a href="#" data-toggle="modal" data-target="#login-modal">Entrar</a>
-            </form>
-          {% endif %}
-        </div>
-        <div class="row">
           <img class="img-thumbnail" src="{% static "hotel/img/spain.png" %}" style="width:32px; height:32px"/>
           <img class="img-thumbnail" src="{% static "hotel/img/france.png" %}" style="width:32px; height:32px"/>
           <img class="img-thumbnail" src="{% static "hotel/img/italy.png" %}" style="width:32px; height:32px"/>
           <img class="img-thumbnail" src="{% static "hotel/img/england.png" %}" style="width:32px; height:32px"/>
           <img class="img-thumbnail" src="{% static "hotel/img/germany.png" %}" style="width:32px; height:32px"/>
+        </div>
+        <div class="row">
+          {% if user.is_authenticated %}
+            <div class="navbar-form navbar-right">
+              <div> {{ mensaje }} <a href="/hotel/logout">Salir</a> </div>
+            </div>
+          {% else %}
+              <a href="#" data-toggle="modal" data-target="#login-modal">Entrar</a>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -117,10 +113,10 @@
       <div class="loginmodal-container">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       	<h1>Entrar</h1><br>
-        <form>
-        	<input type="text" name="user" placeholder="Username">
-        	<input type="password" name="pass" placeholder="Password">
-        	<input type="submit" name="login" class="login loginmodal-submit" value="Login">
+        <form class="navbar-form navbar-right" method="post" action="/hotel/">
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" class="login loginmodal-submit" name="Login" value="Enviar"/>
         </form>
       </div>
     </div>

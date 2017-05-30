@@ -8,56 +8,41 @@
         <div class="panel panel-primary">
           <h3 class="text-center">Opiniones</h3>
           <div class="panel-body">
-            <div class="panel panel-info">
-              <div class="panel-body">
-                <p> Hotel con muchas comodidades y preciosas vistas, sin duda repetiré.</p>
+            {% if Comentarios %}
+              {% for comentario in Comentarios %}
+              <div class="panel panel-info">
+                <div class="panel-body">
+                  <p>{{ comentario.texto }}</p>
+                </div>
+                <div class="panel-footer">{{ comentario.usuario }}</div>
               </div>
-              <div class="panel-footer">Juan Antonio Moraleda</div>
-            </div>
-            <div class="panel panel-info">
-              <div class="panel-body">
-                <p> Estancia agradable y buena antención del personal.</p>
-              </div>
-              <div class="panel-footer">Miguel Martín</div>
-            </div>
-            <div class="panel panel-info">
-              <div class="panel-body">
-                <p> Recomendable 100%</p>
-              </div>
-              <div class="panel-footer">Pablo Robles</div>
-            </div>
-            <div class="panel panel-info">
-              <div class="panel-body">
-                <p> Hotel con muchas comodidades y preciosas vistas, sin duda repetiré.</p>
-              </div>
-              <div class="panel-footer">Pablo Robles</div>
-            </div>
-            <div class="panel panel-info">
-              <div class="panel-body">
-                <p> Hotel con muchas comodidades y preciosas vistas, sin duda repetiré.</p>
-              </div>
-              <div class="panel-footer">Pablo Robles</div>
-            </div>
+              {% endfor %}
+            {% else %}
+              <h5 class="text-center">No hay comentarios</h5>
+            {% endif %}
           </div>
         </div>
       </div>
       <div class="col-md-2"></div>
     </div>
-    <div class="row" id="nuevoComentario">
-      <div class="col-md-2"></div>
-      <div class="col-md-8">
-        <div class="panel panel-primary">
-          <h4 class="text-center">Nuevo comentario</h4>
-          <div class="form-group">
-            <textarea class="form-control" rows="3">
-            </textarea>
-            <button>Añadir</button>
+
+    {% if user.is_authenticated %}
+      <div class="row" id="nuevoComentario">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <div class="panel panel-primary">
+            <h4 class="text-center">Nuevo comentario</h4>
+            <div class="form-group">
+              <form class="navbar-form" method="post" action="/hotel/foro">
+                {% csrf_token %}
+                <textarea rows="2" cols="80" name="texto"></textarea><br>
+                <input type="submit" name="NUEVOCOMENTARIO" value="Enviar" />
+              </form>
+            </div>
           </div>
         </div>
+        <div class="col-md-2"></div>
       </div>
-      <div class="col-md-2"></div>
-    </div>
-    <button id="btnOcultarForm">Usuario sin identificar</button>
-    <button id="btnMostrarForm" style="display:none;">Usuario identificado</button>
+    {% endif %}
   {% endblock %}
 </html>

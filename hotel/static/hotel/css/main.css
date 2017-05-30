@@ -148,3 +148,7 @@
 .login-help{
   font-size: 12px;
 }
+
+input[type=number]{
+    width: 80px;
+}
