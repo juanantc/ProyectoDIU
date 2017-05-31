@@ -11,11 +11,3 @@ class login_form(forms.ModelForm):
 	class Meta:
 		model  = User
 		fields = ('username', 'password')
-
-class reserva_form(forms.ModelForm):
-	username = forms.SlugField (max_length=8, label='Usuario')
-	password = forms.SlugField (max_length=8,widget=forms.PasswordInput(),label='Contraseña')
-
-	class Meta:
-		model  = User
-		fields = ('username', 'password')

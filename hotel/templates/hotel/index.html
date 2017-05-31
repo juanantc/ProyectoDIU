@@ -10,12 +10,15 @@
           <img src="{% static "hotel/img/logo.jpg" %}" class="img-responsive" style="width:48px; height:32px">
           <h3 class="text-center">Haz tu reserva</h3>
           <div class="panel-body">
-            <form class="navbar-form navbar-right" method="post" action="/hotel/">
+            <form class="navbar-form navbar-right" action="/hotel/reserva">
+              {% csrf_token %}
               Fecha de entrada: <input type="text" id="datepicker1">
               Fecha de salida:  <input type="text" id="datepicker2">
-              Adultos: <input type="number">
-              Niños: <input type="number">
-              <input type="submit" name="Login" value="Entrar"/>
+              Adultos: <input type="number" id="adultos">
+              Niños: <input type="number" id="ninos">
+            </form>
+            <form action="/hotel/reserva">
+              <input type="submit" value="Comprobar"/>
             </form>
           </div>
         </div>

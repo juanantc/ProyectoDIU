@@ -1,1 +1,311 @@
-{% extends "hotel/base2.html" %}
+{% extends "hotel/base.html" %}
+{% load static %}
+<html lang="es">
+  {% block container %}
+    <div class="row">
+      <h1 class="text-center">Reserva</h1>
+      {% if paso1 %}
+        <div class="row">
+          <h3 class="text-center">No Hay disponibilidad para la fecha deseada</h3>
+          <h4 class="text-center">Vuelva a comprobar</h4>
+        </div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="panel">
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                  <div class="panel panel-primary">
+                    <img src="{% static "hotel/img/logo.jpg" %}" class="img-responsive" style="width:48px; height:32px">
+                    <div class="panel-body">
+                      <form class="navbar-form navbar-right" method="post" action="/hotel/reservar1">
+                        {% csrf_token %}
+                        Fecha de entrada: <input type="text" id="datepicker1" name="datepicker1">
+                        Fecha de salida:  <input type="text" id="datepicker2" name="datepicker2">
+                        Adultos: <input type="number" id="adultos" name="adultos"><br>
+                        Niños: <input type="number" id="ninos" name="ninos">
+                        <input type="submit" value="Comprobar"/>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      {% endif %}
+      {% if paso2 %}
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="panel">
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <div class="panel panel-primary">
+                    <div class="panel-body">
+                      <div class="col-md-8">
+                        <img src="{% static "hotel/img/habitaciones.jpg" %}" class="img-responsive">
+                      </div>
+                      <div class="col-md-4">
+                        <form action="/hotel/reservar2" method="post">
+                          {% csrf_token %}
+                          <input type="hidden" name="fecha_e" value="{{ fecha_e }}" >
+                          <input type="hidden" name="fecha_s" value="{{ fecha_s }}" >
+                          <input type="hidden" name="adultos" value="{{ adultos }}" >
+                          <input type="hidden" name="ninos" value="{{ ninos }}" >
+
+                          <label for="habitacion">Habitación: </label>
+                          <select id="habitacion" name="habitacion">
+                            <option>201</option>
+                            <option>202</option>
+                            <option>204</option>
+                            <option>205</option>
+                            <option>207</option>
+                            <option>209</option>
+                          </select><br>
+                          <label for="nombre">Nombre: </label>
+                          <input id="nombre" type="text" name="nombre">
+                          <label for="apellidos">Apellidos: </label>
+                          <input id="apellidos" type="text" name="apellidos">
+                          <label for="dni">DNI: </label>
+                          <input id="dni" type="text" name="dni">
+                          <label for="pago">Forma de pago: </label>
+                          <select id="pago" name="pago">
+                            <option>Tarjeta</option>
+                            <option>Transferencia</option>
+                          </select><br>
+                          <br>
+                          <input type="submit" value="Siguiente">
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      {% endif %}
+      {% if paso3 %}
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="panel">
+              <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                  <div class="panel panel-primary">
+                    <div class="panel-body">
+                      <img class="center-block" src="{% static "hotel/img/cargando.gif" %}"/><br>
+                      <form action="/hotel/reservar3" method="post">
+                        <input type="hidden" name="dni" value="{{ dni }}" >
+                        {% csrf_token %}
+                        <input type="submit" value="Siguiente">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      {% endif %}
+      {% if paso4 %}
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="panel">
+              <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                  <div class="panel panel-primary">
+                    <div class="panel-body">
+                      <h3 class="text-center">Proceso finalizado</h3>
+                      <h4 class="text-center">Código reserva: JDF34JQ<h4>
+                      <h5 class="text-center">usuario generado: {{ dni }}<h5>
+                      <h5 class="text-center">La contraseña por defecto coincide con el usuario<h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      {% endif %}
+    </div>
+  {% endblock %}
+
+  <!-- Modal -->
+  <div class="modal fade" id="reserva1" role="dialog">
+    <div class="modal-dialog modal-md">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <img src="img/logo.jpg" class="img-responsive" style="width:48px; height:32px">
+          <h4 class="modal-title text-center">Mis reservas</h4>
+        </div>
+        <div class="modal-body">
+          <div class="panel panel-primary">
+            <div class="panel-body">
+              <script>
+              $(document).ready(function(){
+                  $(".btnCancelar").click(function(){
+                      $("#habitacion").hide();
+                      $(".btnCancelar").hide();
+                  });
+              });
+              </script>
+              <div class="row">
+                <div class="col-md-10">
+                  <h5 id="habitacion">Habitación 3 personas(211) del 23/05/17 hasta 26/05/17</h5>
+                </div>
+                <div class="col-md-2">
+                  <button class="btnCancelar">X</button>
+                </div>
+              </div>
+            </div>
+            <div class="panel-footer"><button data-toggle="modal" data-target="#reserva2" data-dismiss="modal">Siguiente</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="reserva2" role="dialog">
+    <div class="modal-dialog modal-md">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <img src="img/logo.jpg" class="img-responsive" style="width:48px; height:32px">
+          <h4 class="modal-title text-center">Datos personales</h4>
+        </div>
+        <div class="modal-body">
+          <div class="panel panel-primary">
+            <div class="panel-body">
+              <p>DNI:<input type="text"></p>
+              <p>Nombre:<input type="text"></p>
+              <p>Apellidos:<input type="text"></p>
+              <p>Forma de pago:</p>
+              <p><input type="checkbox">Paypal</p>
+              <p><input type="checkbox">Transferencia</p>
+              <p><input type="checkbox">VISA<input type="text"></p> <br>
+
+              <p class="bold">Total a pagar: 130€</p>
+
+            </div>
+            <div class="panel-footer"><button data-toggle="modal" data-target="#reserva3" data-dismiss="modal">Siguiente</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="reserva3" role="dialog">
+    <div class="modal-dialog modal-md">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <img src="img/logo.jpg" class="img-responsive" style="width:48px; height:32px">
+          <h4 class="modal-title text-center"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="panel panel-primary">
+            <div class="panel-body">
+              <img class="center-block" src="img/cargando.gif"/>
+            </div>
+            <div class="panel-footer"><button data-toggle="modal" data-target="#reserva4" data-dismiss="modal">Siguiente</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="reserva4" role="dialog">
+    <div class="modal-dialog modal-md">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <img src="img/logo.jpg" class="img-responsive" style="width:48px; height:32px">
+          <h4 class="modal-title text-center"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="panel panel-primary">
+            <div class="panel-body">
+              <h4 class="text-center">¡Proceso finalizado con éxito!</h4>
+            </div>
+            <div class="panel-footer"><button data-toggle="modal"data-dismiss="modal">Terminar</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="disponib1" role="dialog">
+    <div class="modal-dialog modal-md">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <img src="img/logo.jpg" class="img-responsive" style="width:48px; height:32px">
+          <h4 class="modal-title text-center">Selección de habitación</h4>
+        </div>
+        <div class="modal-body">
+          <div class="panel panel-primary">
+            <div class="panel-body">
+              <img src="img/habitaciones.jpg" class="img-responsive">
+              <select>
+                <option>201</option>
+                <option>202</option>
+                <option>204</option>
+                <option>205</option>
+                <option>207</option>
+                <option>209</option>
+              </select>
+            </div>
+            <div class="panel-footer"><button data-toggle="modal" data-target="#disponib2" data-dismiss="modal">Siguiente</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="disponib2" role="dialog">
+    <div class="modal-dialog modal-md">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <img src="img/logo.jpg" class="img-responsive" style="width:48px; height:32px">
+          <h4 class="modal-title text-center">Selección de habitación</h4>
+        </div>
+        <div class="modal-body">
+          <div class="panel panel-primary">
+            <div class="panel-body">
+              <h4 class="bold">Habitación añadida con éxito</h4>
+            </div>
+            <div class="panel-footer"><button data-toggle="modal" data-dismiss="modal">Terminar</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</html>
